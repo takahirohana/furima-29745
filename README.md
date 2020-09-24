@@ -29,40 +29,43 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column       | Type   | Options     |
-| ------------ | ------ | ----------- |
-| nickname     | string | null: false |
-| email        | string | null: false |
-| password     | string | null: false |
-| real_name    | string | null: false |
-| name_reading | string | null: false |
-| birthday     | string | null: false |
+| Column         | Type   | Options     |
+| -------------- | ------ | ----------- |
+| nickname       | string | null: false |
+| email          | string | null: false |
+| password       | string | null: false |
+| last_name      | string | null: false |
+| fast_name      | string | null: false |
+| last_name_kana | string | null: false |
+| fast_name_kana | string | null: false |
+| birthday       | date   | null: false |
 
 
 
 ### Association
 
 - has_many :items
-- has_one :purchase
-- has_one :shipping_address
+- has_many :purchase
 
 ## items テーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| product_name | string  | null: false |
-| category     | string  | null: false |
-| price        | integer | null: false |
-| seller       | string  | null: false |
-| image        | string  | null: false |
-| text         | string  | null: false |
-| user_id      | integer | null: false |
+| Column          | Type    | Options     |
+| --------------- | ------- | ----------- |
+| product_name    | string  | null: false |
+| category        | integer | null: false |
+| price           | integer | null: false |
+| seller          | string  | null: false |
+| text            | text    | null: false |
+| product_status  | integer | null: false |
+| delivery_fee    | integer | null: false |
+| shipment_source | integer | null: false |
+| shipping_days   | integer | null: false |
+| user            | integer | null: false |
 
 ### Association
 
 - belongs_to :user
 - has_one :purchase
-- has_one :shipping_address
 
 ## purchase テーブル
 
@@ -74,7 +77,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- belongs_to :item
+- has_one :shipping_address
 
 ## shipping_address テーブル
 | Column        | Type       | Options                        |
@@ -83,11 +86,9 @@ Things you may want to cover:
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
 | tell          | integer    | null: false                    |
-| prefecture    | string     | null: false                    |
+| prefecture    | integer    | null: false                    |
 | building_name | string     |                                |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
+
+- belongs_to :purchase
