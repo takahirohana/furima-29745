@@ -38,7 +38,7 @@ Things you may want to cover:
 | fast_name      | string | null: false |
 | last_name_kana | string | null: false |
 | fast_name_kana | string | null: false |
-| birthday       | date   | null: false |
+| birthday       | data   | null: false |
 
 
 
