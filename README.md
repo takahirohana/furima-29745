@@ -45,22 +45,22 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :purchase
+- has_many :purchases
 
 ## items テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| product_name    | string  | null: false |
-| category        | integer | null: false |
-| price           | integer | null: false |
-| seller          | string  | null: false |
-| text            | text    | null: false |
-| product_status  | integer | null: false |
-| delivery_fee    | integer | null: false |
-| shipment_source | integer | null: false |
-| shipping_days   | integer | null: false |
-| user            | integer | null: false |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| product_name    | string     | null: false                    |
+| category        | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| seller          | string     | null: false                    |
+| text            | text       | null: false                    |
+| product_status  | integer    | null: false                    |
+| delivery_fee    | integer    | null: false                    |
+| shipment_source | integer    | null: false                    |
+| shipping_days   | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -71,23 +71,24 @@ Things you may want to cover:
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| price  | integer    | null: false                    |
 | user   | references | null: false, foreign_key: true |
 | item   | references | null: false, foreign_key: true |
 ### Association
 
 - belongs_to :user
+- belongs_to :item
 - has_one :shipping_address
 
 ## shipping_address テーブル
 | Column        | Type       | Options                        |
 | ------------  | ---------- | ------------------------------ |
-| postal_code   | integer    | null: false                    |
+| postal_code   | string     | null: false                    |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
-| tell          | integer    | null: false                    |
+| tell          | string     | null: false                    |
 | prefecture    | integer    | null: false                    |
 | building_name | string     |                                |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
 
