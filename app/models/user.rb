@@ -7,19 +7,20 @@ class User < ApplicationRecord
   has_many :items
   has_many :purchases
 
-  validates :nickname, presence: true
-  validates :email, uniqueness: true
-  validates :email, format: { with: /@.+/ }
-  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
-  validates :last_name, presence: true
-  validates :first_name, presence: true
-  validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ }
-  validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ }
-  validates :last_name_kana, presence: true
-  validates :first_name_kana, presence: true
-  validates :last_name_kana, format: { with: /\A[ァ-ン]+\z/ }
-  validates :first_name_kana, format: { with: /\A[ァ-ン]+\z/ }
-  validates :birthday, presence: true
+  NAME_REGEX_KANJI = /\A[ぁ-んァ-ン一-龥]+\z/
+  NAME_REGEX_KANA = /\A[ァ-ン]+\z/
+
+  with_options presence: true do
+    validates :nickname
+    validates :email, uniqueness: true
+    validates :email, format: { with: /@.+/ }
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
+    validates :password, confirmation: true
+    validates :password_confirmation
+    validates :last_name, format: { with: NAME_REGEX_KANJI }
+    validates :first_name, format: { with: NAME_REGEX_KANJI }
+    validates :last_name_kana, format: { with: NAME_REGEX_KANA }
+    validates :first_name_kana, format: { with: NAME_REGEX_KANA }
+    validates :birthday
+  end
 end
