@@ -55,7 +55,7 @@ Things you may want to cover:
 | category        | integer    | null: false                    |
 | price           | integer    | null: false                    |
 | seller          | string     | null: false                    |
-| text            | text       | null: false                    |
+| product_text    | text       | null: false                    |
 | product_status  | integer    | null: false                    |
 | delivery_fee    | integer    | null: false                    |
 | shipment_source | integer    | null: false                    |
