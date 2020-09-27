@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :item do
-    # image { Faker::Avatar.image }
     product_name { "item" }
     product_text { Faker::Lorem.sentence }
     price        { 3000 }
@@ -16,5 +15,3 @@ FactoryBot.define do
     end
   end
 end
-
-# {  Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/profile.png'), 'image/png') }
