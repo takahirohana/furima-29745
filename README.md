@@ -54,12 +54,11 @@ Things you may want to cover:
 | product_name    | string     | null: false                    |
 | category        | integer    | null: false                    |
 | price           | integer    | null: false                    |
-| seller          | string     | null: false                    |
 | product_text    | text       | null: false                    |
 | product_status  | integer    | null: false                    |
 | delivery_fee    | integer    | null: false                    |
 | shipment_source | integer    | null: false                    |
-| shipping_days   | integer    | null: false                    |
+| shipping_day    | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
 
 ### Association

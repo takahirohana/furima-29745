@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   has_one :purchase
   has_one_attached :image
 
-  validates :category_id, :product_status, :delivery_fee, :shipment_source, :shipping_days, numericality: { other_than: 1 }
+  validates :category_id, :product_status_id, :delivery_fee_id, :shipment_source_id, :shipping_day_id,presence: true, numericality: { other_than: 1 }
   with_options presence: true do
     validates :image
     validates :product_name
