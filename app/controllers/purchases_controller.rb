@@ -1,5 +1,6 @@
 class PurchasesController < ApplicationController
   def index
+    @buyer = Buyer.new
     @item = Item.find(params[:item_id])
     if user_signed_in? && current_user.id != @item.user.id
     else
@@ -7,8 +8,10 @@ class PurchasesController < ApplicationController
     end
   end
   def create
+    @item = Item.find(params[:item_id])
     @buyer = Buyer.new(buyer_params)
     if @buyer.valid?
+      pay_item
       @buyer.save
       return redirect_to root_path
     else
@@ -19,6 +22,15 @@ class PurchasesController < ApplicationController
   private
 
   def buyer_params
-    params.permit(:user_id, :item_id, :postal_code, :city, :house_number, :tell, :building_name, :prefecture_id)
+    params.permit( :item_id, :postal_code, :city, :house_number, :tell, :building_name, :prefecture_id).merge(user_id: current_user.id,token: params[:token])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: buyer_params[:token],
+      currency: 'jpy'
+    )
   end
 end

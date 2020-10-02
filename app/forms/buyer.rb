@@ -1,6 +1,6 @@
 class Buyer
   include ActiveModel::Model
-  attr_accessor :token, :postal_code, :city, :house_number, :tell, :building_name, :prefecture_id, :purchase_id, :user_id, :item
+  attr_accessor :token, :postal_code, :city, :house_number, :tell, :building_name, :prefecture_id, :user_id, :item_id
 
   # purchaseの分
   validates :token, presence: true
@@ -14,7 +14,7 @@ class Buyer
     validates :tell, format: { with: /\A\d{11}\z/ }
   end
   def save
-    Purchase.create(user_id: user_id, item_id: item_id)
-    ShippingAddress.create(postal_code: postal_code, city: city, house_number: house_number, tell: tell, building_name: building_name, prefecture_id: prefecture.id, :purchase_id: purchase.id)
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
+    ShippingAddress.create(postal_code: postal_code, city: city, house_number: house_number, tell: tell, building_name: building_name, prefecture_id: prefecture_id, purchase_id: purchase.id)
   end
 end
