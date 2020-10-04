@@ -39,6 +39,16 @@ RSpec.describe Buyer, type: :model do
       @buyer.valid?
       expect(@buyer.errors.full_messages).to include("Postal code is invalid")
     end
+    it '郵便番号は7文字より多いと登録できない事' do
+      @buyer.postal_code = "123-45678"
+      @buyer.valid?
+      expect(@buyer.errors.full_messages).to include("Postal code is invalid")
+    end
+    it '郵便番号は7文字より少ないと登録できない事' do
+      @buyer.postal_code = "12-3456"
+      @buyer.valid?
+      expect(@buyer.errors.full_messages).to include("Postal code is invalid")
+    end
     it '都道府県の情報のidが1だと登録できないこと' do
       @buyer.prefecture_id = 1
       @buyer.valid?
@@ -68,8 +78,13 @@ RSpec.describe Buyer, type: :model do
       @buyer.valid?
       expect(@buyer.errors.full_messages).to include("Tell can't be blank", "Tell is invalid")
     end
+    it '電話番号にハイフンがあると登録できないこと' do
+      @buyer.tell = "090-1234-5678"
+      @buyer.valid?
+      expect(@buyer.errors.full_messages).to include("Tell is invalid")
+    end
     it '電話番号は12文字以上だと登録できないこと' do
-      @buyer.tell = "123456789012"
+      @buyer.tell = "090123456789"
       @buyer.valid?
       expect(@buyer.errors.full_messages).to include("Tell is invalid")
     end
